@@ -1,0 +1,165 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:ValorantPorting.ViewModels"
+             x:Class="ValorantPorting.Views.MainContentView"
+             x:DataType="vm:MainContentViewModel">
+
+  <Design.DataContext>
+    <vm:MainContentViewModel/>
+  </Design.DataContext>
+
+  <Grid ColumnDefinitions="220,*">
+
+    <!-- Sidebar -->
+    <Border Grid.Column="0" Background="#0F1115" BorderBrush="#1A1D23" BorderThickness="0,0,1,0">
+      <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="0,12,0,12">
+
+          <!-- GENERAL Section -->
+          <TextBlock Classes="section-header" Text="GENERAL"/>
+          <Button Classes="nav" Content="🏠  Home"/>
+          <Button Classes="nav" Content="📰  News &amp; Updates"/>
+          <Button Classes="nav" Content="🎨  Featured Art"/>
+
+          <!-- EXPORT Section -->
+          <TextBlock Classes="section-header" Text="EXPORT"/>
+          <Button Classes="nav selected" Content="📦  Assets"/>
+          <Button Classes="nav" Content="📁  Files"/>
+          <Button Classes="nav" Content="🗺️  Map"/>
+          <Button Classes="nav" Content="🎵  Music"/>
+
+          <!-- COSMETICS Section -->
+          <TextBlock Classes="section-header" Text="COSMETICS"/>
+          <Button Classes="nav" Content="👕  Outfits"/>
+          <Button Classes="nav" Content="🎒  Backpacks"/>
+          <Button Classes="nav" Content="⛏️  Pickaxes"/>
+          <Button Classes="nav" Content="🪂  Gliders"/>
+          <Button Classes="nav" Content="🐾  Pets"/>
+          <Button Classes="nav" Content="💃  Emotes"/>
+          <Button Classes="nav" Content="🎯  Sprays"/>
+
+          <!-- ONLINE Section -->
+          <TextBlock Classes="section-header" Text="ONLINE"/>
+          <Button Classes="nav" Content="💬  Chat"/>
+          <Button Classes="nav" Content="🏆  Leaderboard"/>
+
+          <!-- SETTINGS Section -->
+          <TextBlock Classes="section-header" Text="SETTINGS"/>
+          <Button Classes="nav" Content="🔌  Plugin"/>
+          <Button Classes="nav" Content="⚙️  Export Options"/>
+          <Button Classes="nav" Content="❓  Help"/>
+
+        </StackPanel>
+      </ScrollViewer>
+    </Border>
+
+    <!-- Main Content Area -->
+    <Grid Grid.Column="1" RowDefinitions="Auto,*">
+
+      <!-- Top Bar -->
+      <Border Grid.Row="0"
+              Background="#0F1115"
+              BorderBrush="#1A1D23"
+              BorderThickness="0,0,0,1"
+              Padding="20,12">
+        <Grid ColumnDefinitions="*,Auto">
+
+          <!-- Search and Filters -->
+          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="12">
+
+            <!-- Search Box -->
+            <TextBox Width="400"
+                     Text="{Binding SearchText}"
+                     Watermark="🔍 Search skins..."
+                     FontSize="13"/>
+
+            <!-- Filters Button -->
+            <Button Classes="secondary" Content="Filters ▾" Width="100"/>
+
+            <!-- View Toggle -->
+            <Button Classes="icon" Content="▦" ToolTip.Tip="Grid View"/>
+            <Button Classes="icon" Content="☰" ToolTip.Tip="List View"/>
+
+          </StackPanel>
+
+          <!-- Export Button -->
+          <Button Grid.Column="1"
+                  Classes="primary"
+                  Content="Export to Blender"
+                  Command="{Binding ExportCommand}"/>
+
+        </Grid>
+      </Border>
+
+      <!-- Skins Grid -->
+      <ScrollViewer Grid.Row="1" Padding="20">
+        <ItemsControl ItemsSource="{Binding Skins}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <WrapPanel Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Button Classes="skin-card"
+                      Width="140"
+                      Height="180"
+                      Margin="6"
+                      Click="SkinCard_Click"
+                      Tag="{Binding}">
+                <StackPanel Spacing="8">
+
+                  <!-- Skin Image -->
+                  <Border Width="140"
+                          Height="140"
+                          CornerRadius="8"
+                          ClipToBounds="True"
+                          Background="#1A1D23">
+                    <Image Source="{Binding DisplayIcon}"
+                           Stretch="UniformToFill"
+                           Width="140"
+                           Height="140"/>
+                  </Border>
+
+                  <!-- Skin Name -->
+                  <TextBlock Text="{Binding DisplayName}"
+                             FontSize="12"
+                             Foreground="#FFFFFF"
+                             TextAlignment="Center"
+                             TextWrapping="Wrap"
+                             MaxWidth="140"
+                             MaxLines="2"/>
+
+                </StackPanel>
+              </Button>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+
+        </ItemsControl>
+      </ScrollViewer>
+
+      <!-- Loading Overlay -->
+      <Border Grid.Row="1"
+              Background="#0F1115E0"
+              IsVisible="{Binding IsLoading}">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="16">
+          <TextBlock Text="Loading skins..."
+                     FontSize="16"
+                     Foreground="#FFFFFF"
+                     HorizontalAlignment="Center"/>
+          <Border Width="300" Height="4" Background="#1A1D23" CornerRadius="2">
+            <Border Classes="loading-bar"
+                    Height="4"
+                    Background="#FF4655"
+                    CornerRadius="2"
+                    HorizontalAlignment="Left"/>
+          </Border>
+        </StackPanel>
+      </Border>
+
+    </Grid>
+
+  </Grid>
+
+</UserControl>

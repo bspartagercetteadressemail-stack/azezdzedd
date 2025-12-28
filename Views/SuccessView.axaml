@@ -1,0 +1,66 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:ValorantPorting.ViewModels"
+             x:Class="ValorantPorting.Views.SuccessView"
+             x:DataType="vm:SuccessViewModel">
+
+  <Design.DataContext>
+    <vm:SuccessViewModel/>
+  </Design.DataContext>
+
+  <Grid>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" Spacing="24">
+
+      <!-- Success Icon -->
+      <Border Width="100" Height="100"
+              Background="#FF4655"
+              CornerRadius="50"
+              HorizontalAlignment="Center">
+        <TextBlock Text="✓"
+                   FontSize="60"
+                   Foreground="#FFFFFF"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+      </Border>
+
+      <!-- Title -->
+      <TextBlock Text="Initialization Complete!"
+                 FontSize="28"
+                 FontWeight="Bold"
+                 Foreground="#FFFFFF"
+                 HorizontalAlignment="Center"/>
+
+      <!-- Info Card -->
+      <Border Classes="card" Padding="32">
+        <StackPanel Spacing="16">
+
+          <TextBlock Text="Successfully loaded Valorant assets"
+                     FontSize="16"
+                     Foreground="#FFFFFF"
+                     HorizontalAlignment="Center"/>
+
+          <StackPanel Orientation="Horizontal"
+                      HorizontalAlignment="Center"
+                      Spacing="12">
+            <TextBlock Text="Assets found:"
+                       FontSize="14"
+                       Foreground="#A0A3B0"/>
+            <TextBlock Text="{Binding AssetCount}"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Foreground="#FF4655"/>
+          </StackPanel>
+
+          <Button Classes="primary"
+                  Content="Continue to Assets"
+                  Command="{Binding ContinueCommand}"
+                  HorizontalAlignment="Center"
+                  Margin="0,16,0,0"/>
+
+        </StackPanel>
+      </Border>
+
+    </StackPanel>
+  </Grid>
+
+</UserControl>

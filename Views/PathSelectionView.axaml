@@ -1,0 +1,79 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:ValorantPorting.ViewModels"
+             x:Class="ValorantPorting.Views.PathSelectionView"
+             x:DataType="vm:PathSelectionViewModel">
+
+  <Design.DataContext>
+    <vm:PathSelectionViewModel/>
+  </Design.DataContext>
+
+  <Grid>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="500">
+
+      <!-- Logo -->
+      <Image Source="/Assets/logo.png" Width="120" Height="120" Margin="0,0,0,32"/>
+
+      <!-- Title -->
+      <TextBlock Text="Welcome to Valorant Porting"
+                 FontSize="28"
+                 FontWeight="Bold"
+                 Foreground="#FFFFFF"
+                 HorizontalAlignment="Center"
+                 Margin="0,0,0,12"/>
+
+      <!-- Subtitle -->
+      <TextBlock Text="Export Valorant assets to Blender with ease"
+                 FontSize="14"
+                 Foreground="#A0A3B0"
+                 HorizontalAlignment="Center"
+                 Margin="0,0,0,48"/>
+
+      <!-- Card -->
+      <Border Classes="card" Padding="32">
+        <StackPanel Spacing="20">
+
+          <TextBlock Text="Select Valorant Installation Path"
+                     FontSize="16"
+                     FontWeight="SemiBold"
+                     Foreground="#FFFFFF"
+                     HorizontalAlignment="Center"/>
+
+          <TextBlock Text="Please select the folder where Valorant is installed. This is typically located in:"
+                     FontSize="13"
+                     Foreground="#A0A3B0"
+                     TextWrapping="Wrap"
+                     HorizontalAlignment="Center"
+                     TextAlignment="Center"/>
+
+          <TextBlock Text="C:\Riot Games\VALORANT"
+                     FontSize="12"
+                     Foreground="#FF4655"
+                     FontFamily="Consolas"
+                     HorizontalAlignment="Center"
+                     Margin="0,0,0,12"/>
+
+          <!-- Browse Button -->
+          <Button Classes="primary"
+                  Content="Browse for Valorant Folder"
+                  HorizontalAlignment="Center"
+                  Click="BrowseFolder"/>
+
+        </StackPanel>
+      </Border>
+
+      <!-- Info -->
+      <StackPanel Orientation="Horizontal"
+                  HorizontalAlignment="Center"
+                  Margin="0,24,0,0"
+                  Spacing="8">
+        <TextBlock Text="ℹ️" FontSize="14"/>
+        <TextBlock Text="Make sure Valorant is installed before proceeding"
+                   FontSize="12"
+                   Foreground="#A0A3B0"/>
+      </StackPanel>
+
+    </StackPanel>
+  </Grid>
+
+</UserControl>

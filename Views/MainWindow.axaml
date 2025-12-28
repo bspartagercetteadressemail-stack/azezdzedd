@@ -1,0 +1,80 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ValorantPorting.ViewModels"
+        xmlns:views="using:ValorantPorting.Views"
+        x:Class="ValorantPorting.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="Valorant Porting"
+        Width="1400"
+        Height="900"
+        MinWidth="1200"
+        MinHeight="700"
+        Background="#0F1115"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="40"
+        Icon="/Assets/logo.png"
+        TransparencyLevelHint="None">
+
+  <Design.DataContext>
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
+
+  <Grid RowDefinitions="40,*">
+
+    <!-- Custom Title Bar -->
+    <Border Grid.Row="0" Background="#0F1115" IsHitTestVisible="True">
+      <Grid ColumnDefinitions="*,Auto">
+
+        <!-- Title and Logo -->
+        <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="16,0" VerticalAlignment="Center">
+          <Image Source="/Assets/logo.png" Width="24" Height="24" Margin="0,0,12,0"/>
+          <TextBlock Text="Valorant Porting"
+                     FontSize="13"
+                     FontWeight="SemiBold"
+                     Foreground="#FFFFFF"
+                     VerticalAlignment="Center"/>
+          <TextBlock Text="v1.0.0"
+                     FontSize="11"
+                     Foreground="#A0A3B0"
+                     Margin="8,0,0,0"
+                     VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Window Controls -->
+        <StackPanel Grid.Column="1" Orientation="Horizontal">
+          <Button Classes="titlebar" Content="─" Click="MinimizeWindow"/>
+          <Button Classes="titlebar" Content="□" Click="MaximizeWindow"/>
+          <Button Classes="titlebar close" Content="✕" Click="CloseWindow"/>
+        </StackPanel>
+
+      </Grid>
+    </Border>
+
+    <!-- Content Area -->
+    <Grid Grid.Row="1">
+
+      <!-- Path Selection View -->
+      <views:PathSelectionView
+        IsVisible="{Binding $parent[Window].DataContext.ShowPathSelection}"
+        DataContext="{Binding PathSelectionViewModel}" />
+
+
+      <views:LoadingView
+        IsVisible="{Binding $parent[Window].DataContext.ShowLoading}"
+        DataContext="{Binding LoadingViewModel}" />
+
+      <views:SuccessView
+        IsVisible="{Binding $parent[Window].DataContext.ShowSuccess}"
+        DataContext="{Binding SuccessViewModel}" />
+
+      <views:MainContentView
+        IsVisible="{Binding $parent[Window].DataContext.ShowMainContent}"
+        DataContext="{Binding MainContentViewModel}" />
+
+
+    </Grid>
+
+  </Grid>
+
+</Window>

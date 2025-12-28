@@ -1,0 +1,65 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:ValorantPorting.ViewModels"
+             x:Class="ValorantPorting.Views.LoadingView"
+             x:DataType="vm:LoadingViewModel">
+
+  <Design.DataContext>
+    <vm:LoadingViewModel/>
+  </Design.DataContext>
+
+  <Grid>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="32">
+
+      <!-- Loading Animation -->
+      <Canvas Width="80" Height="80" HorizontalAlignment="Center">
+        <Ellipse Classes="loading-circle"
+                 Width="20" Height="20"
+                 Fill="#FF4655"
+                 Canvas.Left="30" Canvas.Top="0"/>
+        <Ellipse Classes="loading-circle"
+                 Width="20" Height="20"
+                 Fill="#FF4655"
+                 Canvas.Left="60" Canvas.Top="15"
+                 Opacity="0.7"/>
+        <Ellipse Classes="loading-circle"
+                 Width="20" Height="20"
+                 Fill="#FF4655"
+                 Canvas.Left="60" Canvas.Top="45"
+                 Opacity="0.5"/>
+        <Ellipse Classes="loading-circle"
+                 Width="20" Height="20"
+                 Fill="#FF4655"
+                 Canvas.Left="30" Canvas.Top="60"
+                 Opacity="0.3"/>
+        <Ellipse Classes="loading-circle"
+                 Width="20" Height="20"
+                 Fill="#FF4655"
+                 Canvas.Left="0" Canvas.Top="45"
+                 Opacity="0.7"/>
+        <Ellipse Classes="loading-circle"
+                 Width="20" Height="20"
+                 Fill="#FF4655"
+                 Canvas.Left="0" Canvas.Top="15"
+                 Opacity="0.5"/>
+      </Canvas>
+
+      <!-- Status Text -->
+      <TextBlock Text="{Binding StatusMessage}"
+                 FontSize="16"
+                 Foreground="#FFFFFF"
+                 HorizontalAlignment="Center"/>
+
+      <!-- Progress Bar -->
+      <Border Width="400" Height="4" Background="#1A1D23" CornerRadius="2">
+        <Border Classes="loading-bar"
+                Height="4"
+                Background="#FF4655"
+                CornerRadius="2"
+                HorizontalAlignment="Left"/>
+      </Border>
+
+    </StackPanel>
+  </Grid>
+
+</UserControl>
